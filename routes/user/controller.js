@@ -1,3 +1,5 @@
+
+
 const model = require('./model');
 
 module.exports = {
@@ -5,6 +7,21 @@ module.exports = {
     res.status(200).send({ msg: 'Login success' });
   },
   register: (req, res) => {
-    res.status(200).send({ msg: 'Register success' });
+    let newUser = new model({
+      forename: req.body.forename,
+      surname: req.body.surname,
+      email: req.body.email,
+      password: req.body.password
+    });
+
+  newUser.save()
+    .then(result => {
+      console.log(result);
+      res.status(200).send({ msg: 'Register success', user_id: 'id' });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({ msg: 'Register not success' });
+    })
   }
 }
