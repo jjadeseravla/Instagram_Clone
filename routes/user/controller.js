@@ -17,7 +17,7 @@ module.exports = {
   newUser.save()
     .then(result => {
       console.log(result);
-      res.status(200).send({ msg: 'Register success', user_id: 'id' });
+      res.status(200).send({ msg: 'Register success', user_id: result_id });
     })
     .catch(err => {
       console.log(err);
