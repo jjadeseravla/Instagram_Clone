@@ -22,17 +22,17 @@ let router = new Router({
       path: '/register',
       name: 'register',
       component: Register
-      meta: {
-        requireAuth: false
-      }
+      // meta: {
+      //   requireAuth: false
+      // }
     },
     {
       path: '/',
       name: 'home',
       component: Home
-      meta: {
-        requireAuth: true
-      }
+      // meta: {
+      //   requireAuth: true
+      // }
     }
   ]
 })
@@ -46,8 +46,10 @@ router.beforeEach((to, from, next) => {
         params: { nextUrl: to.fullPath }
       })
     } else {
-      console.log("Does mot need auth");
+      console.log("logged in");
     }
+  } else {
+    console.log('does not require auth');
   }
 })
 
