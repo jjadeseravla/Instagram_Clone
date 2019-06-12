@@ -1,56 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Login from './views/Login.vue'
-import Register from './views/Register.vue'
 
 Vue.use(Router)
 
-let router = new Router({
+export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: {
-        requireAuth: false
-      }
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-      // meta: {
-      //   requireAuth: false
-      // }
-    },
-    {
       path: '/',
       name: 'home',
       component: Home
-      // meta: {
-      //   requireAuth: true
-      // }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     }
   ]
 })
-
-
-router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requireAuth)) {
-    if (localStorage.getItem('jwt') == null) {
-      next({
-        path: '/login',
-        params: { nextUrl: to.fullPath }
-      })
-    } else {
-      console.log("logged in");
-    }
-  } else {
-    console.log('does not require auth');
-  }
-})
-
-export default router;
