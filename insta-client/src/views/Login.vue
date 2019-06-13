@@ -9,7 +9,9 @@
       <button class="login-btn">Log In</button>
     </div>
     <footer>
-      Footer
+      <p>
+        Don't have an account? <router-link class="link" to="/register">Sign Up</router-link>.
+      </p>
     </footer>
   </div>
 </template>
@@ -31,10 +33,10 @@ export default {
 .login-page {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
+  box-sizing: border-box;
 
-  padding: 25px;
-
+header {
     h3 {
       color: #000;
       font-size: 28px;
@@ -44,12 +46,14 @@ export default {
         font-weight: 300;
       }
     }
+  }
 
     .form-group {
       flex: 1;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       flex-flow: column;
+      padding: 25px;
 
       input {
         width: 100%;
@@ -78,6 +82,33 @@ export default {
         font-size: 15px;
         font-weight: 700;
       }
+    }
+
+    footer {
+      width: calc(100% - 50px);
+      height: 20px;
+      background-color: #EEE;
+      box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.2);
+      padding: 15px 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        color: #888;
+        font-size: 16px;
+        line-height: 40px;
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+      }
+
+      .link {
+        color: #E35205;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
     }
   }
 
