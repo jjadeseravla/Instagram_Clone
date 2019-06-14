@@ -2,6 +2,7 @@
   <div class="login-page">
     <header>
     <h3>INSTA<span>CLONE</span></h3>
+    <h4>Login</h4>
   </header>
     <div class="form-group">
       <input type="text" v-model="email" placeholder="Email" />
@@ -46,6 +47,15 @@ header {
         font-weight: 300;
       }
     }
+
+    // h4 {
+    //   color: #888;
+    //   font-size: 24px;
+    //   text-align: center;
+    //   font-weight: 300;
+    //   margin: 0;
+    //   padding: 0;
+    // }
   }
 
     .form-group {
