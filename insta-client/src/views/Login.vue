@@ -6,8 +6,8 @@
   </header>
     <div class="form-group">
       <input type="text" v-model="email" placeholder="Email" />
-      <input type="password" v-model="password" placeholer="password"/>
-      <button class="login-btn">Log In</button>
+      <input type="password" v-model="password" placeholer="Password"/>
+      <button class="login-btn" @click="login">Log In</button>
     </div>
     <footer>
       <p>
@@ -24,6 +24,23 @@ export default {
     return {
       email: '',
       password: ''
+    }
+  },
+  methods: {
+    login() {
+      let api_url = this.$store.state.api_url;
+      if(this.email == '' || this.password == '') return alert('Please fill in all fields');
+
+      this.$http.post(api_url + 'user/login', {
+        email: this.email,
+        password: this.password
+      }).then(response => {
+        console.log(response);
+        localStorage.setItem('jwt', response.data.token);
+        console.log("Token: " , localStorage.getItem('jwt'));
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
 }
@@ -48,14 +65,14 @@ header {
       }
     }
 
-    // h4 {
-    //   color: #888;
-    //   font-size: 24px;
-    //   text-align: center;
-    //   font-weight: 300;
-    //   margin: 0;
-    //   padding: 0;
-    // }
+    h4 {
+      color: #888;
+      font-size: 24px;
+      text-align: center;
+      font-weight: 300;
+      margin: 0;
+      padding: 0;
+    }
   }
 
     .form-group {
