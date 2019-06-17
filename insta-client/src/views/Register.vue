@@ -9,7 +9,7 @@
       <input type="text" v-model="surname" placeholder="Surname" />
       <input type="text" v-model="email" placeholder="Email" />
       <input type="password" v-model="password" placeholer="password"/>
-      <button class="login-btn">Register</button>
+      <button class="register-btn">Register</button>
     </div>
     <footer>
       <p>

@@ -5,10 +5,22 @@ const config = require('../../config');
 module.exports = {
   login: (req, res) => {
     model.findOne({ email: req.body.email }, (err, user) => {
-      if(err) throw err;
+
+      if(err) {
+        return res.status(500).send({ msg: err.message });
+      }
+
+      if(!user) {
+        return res.status(404).send({ msg: 'User not found' });
+      }
+
+      console.log(req.body.email, req.body.password);
 
       user.comparePassword(req.body.password, (err, isMatch) => {
-        if(err) throw err;
+        if(err) {
+          return res.status(500).send({ msg: err.message });
+        }
+
         if(isMatch) {
           let token = jwt.sign({ id: user._id }, config.secret, { expiresIn: 86400 });
             res.status(200).send({ msg: 'Login success', token });
