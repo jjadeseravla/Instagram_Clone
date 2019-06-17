@@ -35,9 +35,14 @@ export default {
         email: this.email,
         password: this.password
       }).then(response => {
-        console.log(response);
+        if(response.data.auth) {
+        //console.log("responseeeeeeee" response);
         localStorage.setItem('jwt', response.data.token);
-        console.log("Token: " , localStorage.getItem('jwt'));
+        this.$router.push('/')
+      } else {
+        alert('Error');
+      }
+        //console.log("Token: " , localStorage.getItem('jwt'));
       }).catch(err => {
         console.log(err);
       })

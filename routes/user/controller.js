@@ -23,10 +23,11 @@ module.exports = {
 
         if(isMatch) {
           let token = jwt.sign({ id: user._id }, config.secret, { expiresIn: 86400 });
-            res.status(200).send({ msg: 'Login success', token });
-        } else {
-          res.status(500).send({ msg: 'Passwords did not match' });
+            res.status(200).send({ auth: true, token });
+            return;
         }
+        
+          res.status(500).send({ auth: false, msg: 'Passwords did not match' });
       });
     })
   },
