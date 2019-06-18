@@ -4,11 +4,14 @@
     <h3>INSTA<span>CLONE</span></h3>
     <h4>Login</h4>
   </header>
-    <div class="form-group">
+    <main class="form-group">
       <input type="text" v-model="email" placeholder="Email" />
       <input type="password" v-model="password" placeholer="Password"/>
       <button class="login-btn" @click="login">Log In</button>
-    </div>
+      <div class="error_msg" v-if="hasErrors">
+        {{ error }}
+      </div>
+    </main>
     <footer>
       <p>
         Don't have an account? <router-link class="link" to="/register">Sign Up</router-link>.
@@ -23,7 +26,9 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      hasErrors: false,
+      error: ''
     }
   },
   methods: {
@@ -40,7 +45,9 @@ export default {
         localStorage.setItem('jwt', response.data.token);
         this.$router.push('/')
       } else {
-        alert('Error');
+        console.log("Error: ", response.data.msg);
+        this.error = response.data.msg;
+        this.hasErrors = true;
       }
         //console.log("Token: " , localStorage.getItem('jwt'));
       }).catch(err => {
@@ -79,42 +86,6 @@ header {
       padding: 0;
     }
   }
-
-    .form-group {
-      flex: 1;
-      display: flex;
-      justify-content: flex-start;
-      flex-flow: column;
-      padding: 25px;
-
-      input {
-        width: 100%;
-        height: 30px;
-        border: 1px solid #DDD;
-        margin-bottom: 5px;
-        text-indent: 5px;
-        background: #EEE;
-        outline: none;
-
-        &:focus {
-          border: 1px solid #AAA;
-        }
-      }
-
-      button {
-        width: 100%;
-        height: 30px;
-        background: #FFCE00;
-        appearance: none;
-        border: none;
-        outline: none;
-        border-radius: 8px;
-
-        color: #171717;
-        font-size: 15px;
-        font-weight: 700;
-      }
-    }
 
     footer {
       width: calc(100% - 50px);
