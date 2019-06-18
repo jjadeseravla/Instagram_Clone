@@ -14,6 +14,8 @@ module.exports = {
         return res.status(404).send({ msg: 'User not found' });
       }
 
+
+
       console.log(req.body.email, req.body.password);
 
       user.comparePassword(req.body.password, (err, isMatch) => {
@@ -25,9 +27,9 @@ module.exports = {
           let token = jwt.sign({ id: user._id }, config.secret, { expiresIn: 86400 });
             res.status(200).send({ auth: true, token });
             return;
+        } else {
+          res.send({ auth: false, msg: "passwords is incorrect"});
         }
-        
-          res.status(500).send({ auth: false, msg: 'Passwords did not match' });
       });
     })
   },
@@ -42,12 +44,16 @@ module.exports = {
 
   newUser.save()
     .then(result => {
-      console.log(result);
-      res.status(200).send({ msg: 'Register success', user_id: result._id });
+        let token = jwt.sign({ id: result._id }, config.secret, { expiresIn: 86400 });
+          res.status(200).send({ auth: true, token });
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send({ msg: 'Register not success' });
+      if(err.code == 11000) {
+
+        res.send({ auth: false, msg: "Email already exists" });
+        return
+        }
+        res.send({ auth: false, msg: "internal server error has occurred"});
      })
   }
 }

@@ -7,9 +7,12 @@
     <div class="form-group">
       <input type="text" v-model="forename" placeholder="Forename" />
       <input type="text" v-model="surname" placeholder="Surname" />
-      <input type="text" v-model="email" placeholder="Email" />
+      <input type="text" v-model="email" placeholder="Email" :class="(hasErrors) ? 'err' : '' " />
       <input type="password" v-model="password" placeholer="password"/>
       <button class="register-btn" @click="register">Register</button>
+      <div class="error_msg" v-if="hasErrors">
+        {{ error }}
+      </div>
     </div>
     <footer>
       <p>
@@ -27,12 +30,15 @@ export default {
       forename: '',
       surname: '',
       email: '',
-      password: ''
+      password: '',
+      hasErrors: false,
+      error: ''
     }
   },
   methods: {
     register() {
       let api_url = this.$store.state.api_url;
+
       if(this.email == '' ||
          this.password == '' ||
          this.forename == '' ||
@@ -46,9 +52,18 @@ export default {
         email: this.email,
         password: this.password
       }).then(response => {
-        console.log(response);
+        if(response.data.auth) {
+        //console.log("responseeeeeeee" response);
+        localStorage.setItem('jwt', response.data.token);
+        this.$router.push('/')
+      } else {
+        this.error = response.data.msg
+        this.hasErrors = true
+      }
       }).catch(err => {
-        console.log(err);
+        console.log("Error: ", err);
+        this.hasErrors = true
+        this.error = err
       })
     }
   }
@@ -103,6 +118,11 @@ header {
         background: #EEE;
         outline: none;
 
+        &.err {
+          background: rgba(255, 0, 0, 0.1);
+          border: 1px solid #AF1E2D;
+        }
+
         &:focus {
           border: 1px solid #AAA;
         }
@@ -120,6 +140,14 @@ header {
         color: #171717;
         font-size: 15px;
         font-weight: 700;
+      }
+      .error_msg {
+        margin: 15px 0px;
+        padding: 10px;
+        background-color: rgba(255, 0, 0, 0.2);
+        color: #171717;
+        font-weight: bold;
+        border-radius: 8px;
       }
     }
 
