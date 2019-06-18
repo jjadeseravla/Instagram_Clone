@@ -10,8 +10,7 @@
 export default {
   methods: {
     logout() {
-      localStorage.removeItem('jwt');
-      this.$router.push('/');
+      this.$store.commit('logout');
     }
   }
 }
