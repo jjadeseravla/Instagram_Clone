@@ -11,7 +11,7 @@ module.exports = {
       }
 
       if(!user) {
-        return res.status(404).send({ msg: 'User not found' });
+        return res.send({ auth: false, mailError: true, msg: 'Email not found' });
       }
 
 
@@ -28,7 +28,7 @@ module.exports = {
             res.status(200).send({ auth: true, token });
             return;
         } else {
-          res.send({ auth: false, msg: "passwords is incorrect"});
+          res.send({ auth: false, passError: true, msg: "Password is incorrect"});
         }
       });
     })
@@ -53,7 +53,7 @@ module.exports = {
         res.send({ auth: false, msg: "Email already exists" });
         return
         }
-        res.send({ auth: false, msg: "internal server error has occurred"});
+        res.send({ auth: false, msg: "Internal server error has occurred"});
      })
   }
 }

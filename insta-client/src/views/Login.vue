@@ -5,8 +5,8 @@
     <h4>Login</h4>
   </header>
     <main class="form-group">
-      <input type="text" v-model="email" placeholder="Email" />
-      <input type="password" v-model="password" placeholer="Password"/>
+      <input type="text" v-model="email" placeholder="Email" :class="(emailError) ? 'err' : '' "/>
+      <input type="password" v-model="password" placeholer="Password" :class="(passError) ? 'err' : '' "/>
       <button class="login-btn" @click="login">Log In</button>
       <div class="error_msg" v-if="hasErrors">
         {{ error }}
@@ -28,6 +28,8 @@ export default {
       email: '',
       password: '',
       hasErrors: false,
+      emailError: false,
+      passError: false,
       error: ''
     }
   },
@@ -46,6 +48,16 @@ export default {
         this.$router.push('/')
       } else {
         console.log("Error: ", response.data.msg);
+        if(response.data.mailError) {
+          this.emailError = true;
+        } else {
+          this.emailError = false;
+        }
+        if(response.data.passError) {
+          this.passError = true;
+        } else {
+          this.passError = false;
+        }
         this.error = response.data.msg;
         this.hasErrors = true;
       }
