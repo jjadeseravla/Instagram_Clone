@@ -9,23 +9,23 @@ export default new Vuex.Store({
     isAuthenticated: false
   },
   mutations: {
-    isAuthenticated() {
+    isAuthenticated(state) {
       if(localStorage.getItem('jwt') != null) {
-        state.isAuthenticated = false;
-      } else {
         state.isAuthenticated = true;
+      } else {
+        state.isAuthenticated = false;
       }
     },
     login(state, token) {
         state.isAuthenticated = true;
-        localStorage.removeItem('jwt', token);
+        localStorage.setItem('jwt', token);
+        console.log('worrrrrrrrrrrrk', this.$router);
         this.$router.push('/');
-      },
+    },
     logout(state) {
       state.isAuthenticated = false;
       localStorage.removeItem('jwt');
-      this.$router.push('./login');
-    //}
+      this.$router.push('/login');
+      }
     }
-  }
 })

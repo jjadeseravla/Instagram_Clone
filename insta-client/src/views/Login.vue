@@ -45,17 +45,20 @@ export default {
         if(response.data.auth) {
           this.$store.commit('login', response.data.token)
       } else {
+        
         console.log("Error: ", response.data.msg);
         if(response.data.mailError) {
           this.emailError = true;
         } else {
           this.emailError = false;
         }
+
         if(response.data.passError) {
           this.passError = true;
         } else {
           this.passError = false;
         }
+
         this.error = response.data.msg;
         this.hasErrors = true;
       }
