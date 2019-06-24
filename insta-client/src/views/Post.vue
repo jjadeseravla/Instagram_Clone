@@ -50,6 +50,9 @@ export default {
       })
       .then(response => {
         console.log(response);
+        this.captured = false;
+        this.cap = "";
+        this.desc = "";
       })
     }
   },

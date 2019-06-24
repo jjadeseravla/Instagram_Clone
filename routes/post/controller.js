@@ -27,5 +27,11 @@ module.exports = {
             if(err) res.send({ success: false, error: err });
           })
       })
-  }
+  },
+  getposts: (req, res) => {
+    model.find()
+      .then(result => {
+        res.send(result);
+      });
+    }
 }
