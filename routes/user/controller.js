@@ -1,4 +1,5 @@
 const model = require('./model');
+const postModel = require('../post/model');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
@@ -55,5 +56,25 @@ module.exports = {
         }
         res.send({ auth: false, msg: "Internal server error has occurred"});
      })
-  }
-}
+  },
+  getProfile: (req, res) => {
+    let user_id = jwt.decode(req.body.auth_token).id;
+    model.findById(user_id)
+      .then(user => {
+        if(!user) {
+          res.send({ success: false, msg: "User not found"});
+        }
+        postModel.find({ user_id: user_id })
+          .then(posts => {
+            res.send({
+              success: true,
+              details: {
+                display_name: user.forename + ' ' +
+                user.surname,
+                posts: posts
+                }
+              })
+            })
+          });
+      }
+    }
