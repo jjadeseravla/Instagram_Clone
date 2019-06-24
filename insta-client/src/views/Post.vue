@@ -1,16 +1,14 @@
 <template>
   <main class="view post">
 <section class="stream">
-  <video ref="video" id="video" width="100%" height="300" autoplay v-if="!captured">
+  <video ref="video" id="video" width="100%" height="300" autoplay :class="(!captured) ? 'show' : 'hide'">
 
   </video>
   <button class="capture-btn" @click="capture">Capture</button>
+    <button class="cancel-btn" @click="cancel" v-if="captured">Cancel</button>
 </section>
 <section class="capture">
   <canvas ref="canvas" id="canvas" width="100%" height="300" :class="(captured) ? 'show' : 'hide'"></canvas>
-</section>
-<section class='image'>
-  <img :src="cap" alt="">
 </section>
   </main>
 </template>
@@ -22,20 +20,29 @@ export default {
     return {
       video: {},
       canvas: {},
+      constraints: {},
       cap: "",
-      hasCaptured: false
+      captured: false
     }
   },
   methods: {
     capture() {
       let context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
       this.cap = canvas.toDataURL("image/png");
+      this.captured = true;
+    },
+    cancel() {
+      this.captured = false;
     }
   },
   mounted() {
     this.video = this.$refs.video;
     this.video.width = window.innerWidth;
     this.video.height = window.innerHeight - 80;
+    this.constraints = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
 
     if(this.$refs.canvas) {
     this.canvas = this.$refs.canvas;
@@ -45,7 +52,7 @@ export default {
 
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({
-        video: true
+        video: this.constraints
       }).then(stream => {
         this.video.srcObject = stream;
         this.video.play();
@@ -71,5 +78,10 @@ export default {
     left: 50%;
     bottom: 65px;
     transform: translateX(-50%);
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
   }
 </style>
