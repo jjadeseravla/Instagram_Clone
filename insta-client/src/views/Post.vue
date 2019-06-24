@@ -4,10 +4,13 @@
   <video ref="video" id="video" width="100%" height="300" autoplay v-if="!captured">
 
   </video>
-  <button @click="capture">Capture</button>
+  <button class="capture-btn" @click="capture">Capture</button>
 </section>
 <section class="capture">
   <canvas ref="canvas" id="canvas" width="100%" height="300" :class="(captured) ? 'show' : 'hide'"></canvas>
+</section>
+<section class='image'>
+  <img :src="cap" alt="">
 </section>
   </main>
 </template>
@@ -19,14 +22,14 @@ export default {
     return {
       video: {},
       canvas: {},
-      captures: [],
+      cap: "",
       hasCaptured: false
     }
   },
   methods: {
     capture() {
       let context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
-      this.captures.push(canvas.toDataURL("image/png"));
+      this.cap = canvas.toDataURL("image/png");
     }
   },
   mounted() {
@@ -61,5 +64,12 @@ export default {
 
   .hide {
     display: none;
+  }
+
+  .capture-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 65px;
+    transform: translateX(-50%);
   }
 </style>
