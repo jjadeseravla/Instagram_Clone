@@ -4,11 +4,15 @@
   <video ref="video" id="video" width="100%" height="300" autoplay :class="(!captured) ? 'show' : 'hide'">
 
   </video>
-  <button class="capture-btn" @click="capture">Capture</button>
-    <button class="cancel-btn" @click="cancel" v-if="captured">Cancel</button>
-</section>
+    <div class="post-btns">
+      <button class="capture-btn" @click="capture" v-if="!captured">Capture</button>
+      <button class="cancel-btn" @click="cancel" v-if="captured">Cancel</button>
+      <button class="upload-btn" @click="upload" v-if="captured">Upload</button>
+    </div>
+  </section>
 <section class="capture">
   <canvas ref="canvas" id="canvas" width="100%" height="300" :class="(captured) ? 'show' : 'hide'"></canvas>
+
 </section>
   </main>
 </template>
@@ -27,8 +31,8 @@ export default {
   },
   methods: {
     capture() {
-      let context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
-      this.cap = canvas.toDataURL("image/png");
+      this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
+      this.cap = this.canvas.toDataURL("image/png");
       this.captured = true;
     },
     cancel() {
@@ -73,7 +77,7 @@ export default {
     display: none;
   }
 
-  .capture-btn {
+  .post-btns {
     position: absolute;
     left: 50%;
     bottom: 65px;

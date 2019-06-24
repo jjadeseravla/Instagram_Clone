@@ -51,13 +51,11 @@ export default new Vuex.Store({
         router.push('/register')
 
         // console.log('worrrrrrrrrrrrk', this.$router);
-        // this.$router.push('/');
     },
     logout(state) {
       state.isAuthenticated = false;
       localStorage.removeItem('jwt');
       router.push('/login')
-      // this.$router.push('/login');
       }
     }
 })
