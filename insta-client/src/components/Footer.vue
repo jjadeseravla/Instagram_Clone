@@ -5,6 +5,7 @@
     <button @click="goto('/newpost')">Post</button>
     <button>Notifications</button>
     <button @click="goto('/profile')">Profile</button>
+    <button @click="goto('/login')">Log out</button>
   </footer>
 </template>
 

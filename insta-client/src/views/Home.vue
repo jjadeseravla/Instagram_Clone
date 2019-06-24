@@ -11,9 +11,6 @@
         <p class="timestamp">{{ timestampToDate(post.timestamp) }}</p>
       </footer>
     </article>
-
-
-    <button @click="logout">Log out</button>
   </main>
 </template>
 
