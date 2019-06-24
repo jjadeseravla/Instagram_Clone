@@ -8,7 +8,7 @@
       <footer class="post-desc">
         <p><strong>{{ post.display_name }}:</strong> {{ post.desc }}</p>
         <!-- {{ post.display_name + ': ' + post.desc }} -->
-        <!-- <p class="timestamp">{{ timestampToDate(post.timestamp) }}</p> -->
+        <p class="timestamp">{{ timestampToDate(post.timestamp) }}</p>
       </footer>
     </article>
 

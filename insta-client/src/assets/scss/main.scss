@@ -10,10 +10,15 @@ body {
   min-height: 100vh;
 }
 
+main {
+  padding: 40px 0px;
+}
+
+
 //components
 @import './components/Header.scss';
 @import './components/Footer.scss';
-@import '/components/post.scss'
+@import '/components/post.scss';
 
 .form-group {
   flex: 1;
