@@ -10,6 +10,9 @@
 
     <button @click="goto('/profile')"><i class="material-icons">account_boxt</i></button>
 
+    <button class="logout-btn" @click="$store.commit('logout')">
+      <i class="material-icons">power_off</i>
+    </button>
     <!-- <button @click="goto('/login')"><i class="material-icons">log_out</i></button> -->
   </footer>
 </template>
