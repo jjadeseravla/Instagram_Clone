@@ -7,6 +7,8 @@ import Post from './views/Post.vue'
 import Profile from './views/Profile.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import ImageInput from './views/ImageInput.vue'
+import ImageUploaderMain from './views/ImageUploaderMain.vue'
 
 Vue.use(Router)
 
@@ -53,6 +55,14 @@ let router = new Router({
         meta: {
           requireAuth: true
         }
+    },
+    {
+      path: '/imageinput',
+      name: 'imageinput',
+      component: ImageUploaderMain,
+      meta: {
+        requireAuth: true
+      }
     }
   ]
 })

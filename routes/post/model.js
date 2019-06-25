@@ -19,9 +19,9 @@ const postSchema = Schema({
     type: String,
     required: false
   },
-  timeStamp: {
+  timestamp: {
     type: String,
-    default: Date.now()
+    required: true
   }
 });
 

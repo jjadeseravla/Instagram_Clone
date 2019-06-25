@@ -32,9 +32,12 @@ module.exports = {
   getposts: (req, res) => {
     model.find()
       .then(result => {
-        result = result.sort(function(a, b) {
-          return b.timestamp - a.timestamp;
-        })
+        console.log(Object.keys(result[0]._doc));
+        result = result
+          .filter((r) => r._doc.timestamp)
+          .sort(function(a, b) {
+            return b._doc.timestamp - a._doc.timestamp;
+          });
         res.send(result);
       });
     }

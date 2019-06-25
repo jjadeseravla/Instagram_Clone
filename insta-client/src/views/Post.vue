@@ -1,5 +1,15 @@
 <template>
  <main class="view post">
+
+   <!-- <form method="post" enctype="multipart/form-data">
+     <input type="file" name="files[]" multiple />
+     <input type="submit" value="Upload File" name="submit" />
+   </form> -->
+
+   <button class="img-input-btn" @click="goto('/imageinput')">
+     Upload Image from Camera Roll
+   </button>
+
   <section class="stream">
   <video ref="video" id="video" width="100%" height="300" autoplay :class="(!captured) ? 'show' : 'hide'">
 
@@ -40,6 +50,9 @@ export default {
     }
   },
   methods: {
+    goto(path) {
+      this.$router.push(path);
+    },
     capture() {
       this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
       this.cap = this.canvas.toDataURL("image/png");
@@ -86,7 +99,7 @@ export default {
         this.video.srcObject = stream;
         this.video.play();
       }).catch(err => {
-        console.log(errs);
+        console.log(err);
       })
     }
   }

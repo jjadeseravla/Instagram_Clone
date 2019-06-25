@@ -8,7 +8,7 @@
 
     <button><i class="material-icons">announcement</i></button>
 
-    <button @click="goto('/profile')"><i class="material-icons">account_boxt</i></button>
+    <button @click="goto('/profile')"><i class="material-icons">account_box</i></button>
 
     <button class="logout-btn" @click="$store.commit('logout')">
       <i class="material-icons">power_off</i>
