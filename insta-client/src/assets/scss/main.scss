@@ -14,11 +14,12 @@ body {
   padding: 40px 0px;
 }
 
+@import './pages/post.scss';
+@import './pages/profile.scss';
 
 //components
 @import './components/Header.scss';
 @import './components/Footer.scss';
-@import '/components/post.scss';
 
 .form-group {
   flex: 1;

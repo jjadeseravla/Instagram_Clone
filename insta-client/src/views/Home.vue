@@ -23,9 +23,6 @@ export default {
     }
   },
   methods: {
-    logout() {
-      this.$store.commit('logout');
-    },
     timestampToDate (timestamp) {
       timestamp = new Number(timestamp);
       let d = new Date(timestamp);

@@ -4,6 +4,9 @@
   left: 0;
   right: 0;
 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
   height: 40px;
 
   background-color: #EEE;
@@ -12,4 +15,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  button {
+    appearance: none;
+    outline: none;
+    background: none;
+  }
 }
