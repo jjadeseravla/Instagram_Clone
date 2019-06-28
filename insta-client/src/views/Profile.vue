@@ -7,7 +7,7 @@
   <section>
     <ImageInput v-model="avatar" @input="called">
       <div slot="activator">
-        <v-avatar size="150px" v-ripple v-if="!avatar" class="grey lighten-3 mb-3">
+        <v-avatar size="150px" v-ripple v-if="!avatar.image" class="grey lighten-3 mb-3">
           <span>Click to add avatar</span>
         </v-avatar>
         <v-avatar size="150px" v-ripple v-else class="mb-3">
@@ -16,7 +16,7 @@
       </div>
     </ImageInput>
     <v-slide-x-transition>
-      <div v-if="avatar && saved == false">
+      <div v-if="avatar.image && saved == false">
         <v-btn class="primary" @click="uploadAvatar" :loading="saving">Save Avatar</v-btn>
       </div>
     </v-slide-x-transition>
@@ -89,7 +89,8 @@ import ImageInput from './ImageInput.vue'
         this.saved = true
       },
       called(payload){
-        this.avatar.image = payload.imageFile;
+        console.log(payload.dataUrl);
+        this.avatar.image = payload.dataUrl;
       }
     },
     beforeMount() {

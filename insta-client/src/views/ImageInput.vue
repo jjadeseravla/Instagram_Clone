@@ -59,8 +59,15 @@
             let formData = new FormData()
             let imageURL = URL.createObjectURL(imageFile)
             formData.append(fieldName, imageFile)
+            const reader = new FileReader();
+            reader.onload =() => {
+              console.log(reader.result);
+              this.$emit('input', { formData, dataUrl:reader.result });
+            }
+            reader.readAsDataURL(imageFile);
+
             // Emit the FormData and image URL to the parent component
-            this.$emit('input', { formData, imageURL, imageFile })
+
           }
         }
       }

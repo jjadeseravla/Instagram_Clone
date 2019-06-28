@@ -67,7 +67,7 @@ module.exports = {
         console.log(user);
         postModel.find({ user_id: user_id })
           .then(posts => {
-
+            console.log(posts);
             res.send({
               success: true,
               details: {

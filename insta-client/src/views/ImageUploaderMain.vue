@@ -4,11 +4,11 @@
     <v-container grid-list-xl> -->
       <ImageInput v-model="avatar">
         <div slot="activator">
-          <v-avatar size="150px" v-ripple v-if="!avatar" class="grey lighten-3 mb-3">
+          <v-avatar size="150px" v-ripple v-if="!avatar.image" class="grey lighten-3 mb-3">
             <span>Click to add avatar</span>
           </v-avatar>
           <v-avatar size="150px" v-ripple v-else class="mb-3">
-            <img :src="avatar.imageURL" alt="avatar">
+            <img :src="avatar.image" alt="avatar">
           </v-avatar>
         </div>
       </ImageInput>
