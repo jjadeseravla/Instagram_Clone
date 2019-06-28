@@ -19,7 +19,9 @@
 export default {
   computed: {
     feed() {
+      
       return this.$store.state.feed;
+      //console.log($store);
     }
   },
   methods: {

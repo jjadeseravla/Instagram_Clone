@@ -64,17 +64,40 @@ module.exports = {
         if(!user) {
           res.send({ success: false, msg: "User not found"});
         }
+        console.log(user);
         postModel.find({ user_id: user_id })
           .then(posts => {
+
             res.send({
               success: true,
               details: {
                 display_name: user.forename + ' ' +
                 user.surname,
+                avatar: user.avatar,
                 posts: posts
                 }
               })
             })
           });
+      },
+      saveAvatar: (req, res) =>{
+        let user_id = jwt.decode(req.body.auth_token).id;
+
+        model.findById(user_id)
+          .then(result => {
+            if(!result) {
+              res.send({ success: false, msg: "No user was found" });
+              return;
+            }
+
+            model.update(result, { avatar :req.body.image }, (err) => {
+              if(err) {
+                  res.send({ success: false, error: "Failed!" });
+                  return;
+              }
+              res.send({ success: true, result: result });
+
+            });
+          })
       }
     }
