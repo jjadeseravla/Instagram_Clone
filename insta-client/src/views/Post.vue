@@ -6,9 +6,33 @@
      <input type="submit" value="Upload File" name="submit" />
    </form> -->
 
-   <button class="img-input-btn" @click="goto('/imageinput')">
+   <!-- <button class="img-input-btn" @click="goto('/picturesinput')">
      Upload Image from Camera Roll
-   </button>
+   </button> -->
+
+    <!-- <section class="avatar">
+     <h1>hello</h1>
+     <ImageInput v-model="avatar" @input="called">
+       <div slot="activator">
+         <v-avatar size="150px" v-ripple>
+           <span @click="uploadAvatar">Click to add picture from camera roll</span>
+         </v-avatar>
+
+         <v-avatar size="150px" v-ripple v-if="!avatar.image" class="grey lighten-3 mb-3">
+
+        </v-avatar>
+
+           <v-avatar size="150px" v-ripple v-else class="mb-3">
+           <img :src="avatar.image" alt="avatar">
+         </v-avatar>
+       </div>
+     </ImageInput> -->
+     <!-- <v-slide-x-transition>
+       <div v-if="avatar.image && saved == false">
+         <v-btn class="primary" @click="uploadAvatar" :loading="saving">Save Avatar</v-btn>
+       </div>
+     </v-slide-x-transition> -->
+   <!-- </section>
 
   <section class="stream">
   <video ref="video" id="video" width="100%" height="300" autoplay :class="(!captured) ? 'show' : 'hide'">
@@ -32,12 +56,13 @@
         <label for="desc">Description: </label>
         <input type="text" id="desc" name="desc" class="input-field" v-model="desc" />
       </div>
-    </section>
+    </section> -->
   </main>
 </template>
 
 
 <script>
+import PicturesInput from './PicturesInput.vue'
 export default {
   data () {
     return {
@@ -76,6 +101,19 @@ export default {
         this.desc = "";
       })
     }
+  },
+  uploadAvatar() {
+    this.saving = true
+    this.$http.post(this.$store.state.api_url +'user/', {
+      auth_token: localStorage.getItem('jwt'),
+      image: this.avatar.image,
+    })
+    .then(response => {
+      console.log(response);
+      this.captured = false;
+      this.cap = "";
+      this.desc = "";
+    })
   },
   mounted() {
     this.video = this.$refs.video;

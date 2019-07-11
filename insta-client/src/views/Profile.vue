@@ -4,7 +4,7 @@
     <strong>Name: </strong> {{ display_name }}
   </section>
 
-  <section>
+  <section class="avatar">
     <ImageInput v-model="avatar" @input="called">
       <div slot="activator">
         <v-avatar size="150px" v-ripple v-if="!avatar.image" class="grey lighten-3 mb-3">
